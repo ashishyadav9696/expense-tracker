@@ -10,6 +10,7 @@ const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDi
 const ExpensesPage = () => {
   const dispatch = useDispatch();
   const items = useSelector(s => s.expenses.items);
+  const username = useSelector(s => s.expenses.currentUser);
 
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(null);
@@ -30,9 +31,9 @@ const ExpensesPage = () => {
 
   const handleSave = async (data) => {
     if (editing) {
-      await dispatch(updateExpense({ id: editing.id, data }));
+      await dispatch(updateExpense({ username, id: editing.id, data }));
     } else {
-      await dispatch(createExpense(data));
+      await dispatch(createExpense({ username, data }));
     }
     setShowModal(false);
     setEditing(null);
@@ -41,7 +42,7 @@ const ExpensesPage = () => {
   const handleEdit = (item) => { setEditing(item); setShowModal(true); };
   const confirmDelete = (item) => setDeleteTarget(item);
   const handleDelete = async () => {
-    await dispatch(deleteExpense(deleteTarget.id));
+    await dispatch(deleteExpense({ username, id: deleteTarget.id }));
     setDeleteTarget(null);
   };
 

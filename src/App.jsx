@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchExpenses } from './store/expenseSlice';
+import { fetchExpenses, setCurrentUser, clearExpenses } from './store/expenseSlice';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import ExpensesPage from './pages/Expenses';
@@ -13,7 +13,10 @@ function AppInner() {
   const [user, setUser] = useState(() => sessionStorage.getItem('is_user') || '');
 
   useEffect(() => {
-    if (user) dispatch(fetchExpenses());
+    if (user) {
+      dispatch(setCurrentUser(user));
+      dispatch(fetchExpenses(user));
+    }
   }, [user, dispatch]);
 
   const handleLogin = (username) => {
@@ -24,6 +27,7 @@ function AppInner() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('is_user');
+    dispatch(clearExpenses());
     setUser('');
     navigate('/', { replace: true });
   };
