@@ -39,7 +39,11 @@ export const deleteExpense = createAsyncThunk('expenses/delete', async ({ userna
 
 const slice = createSlice({
   name: 'expenses',
-  initialState: { items: [], loading: false, currentUser: '' },
+  initialState: {
+    items: [],
+    loading: false,
+    currentUser: typeof window !== 'undefined' ? sessionStorage.getItem('is_user') || '' : ''
+  },
   reducers: {
     setCurrentUser(state, action) {
       state.currentUser = action.payload;
