@@ -1,21 +1,20 @@
-# 📊 SpendaWise | Advanced Expense Tracker
+# 📊 internSpark | Sleek Expense Tracker
 
-SpendaWise is a high-end, responsive React Single Page Application (SPA) designed to track, manage, and visualize your personal expenses. Featuring a futuristic **dark-themed glassmorphism** design, real-time sync with **MockAPI.io** using **Axios**, and interactive budget analytics plotted via **Recharts**, SpendaWise makes budgeting both powerful and visually stunning.
+internSpark is a premium, high-end, responsive React Single Page Application (SPA) designed to track, manage, and visualize personal expenses. Featuring a futuristic **dark-themed glassmorphism** design, real-time Redux state management, and an interactive budget analytics dashboard, internSpark makes personal finance management both powerful and visually stunning.
 
 ---
 
 ## ✨ Features
 
-- **💸 Complete CRUD Expense Actions**: Create, view, edit, and delete any expense record.
-- **🏷️ Category Filtering**: Instantly filter your transactions using custom-colored category tags:
-  - `Food`, `Transport`, `Entertainment`, `Health`, `Shopping`, `Others`
-- **📊 Real-time Budget Analytics**:
-  - **Pie Chart**: Visualizes spending distribution by category.
-  - **Bar Chart**: Tracks monthly expenditure trends chronologically.
-  - **Stats Card Deck**: Computes Total Expenditure, Average Transaction, Top Spend Category, and Single Largest Purchase instantly.
-- **🔄 Dynamic Sync Manager**: Toggle between **Demo Mode** (simulated LocalStorage DB with latency delays) or **Live MockAPI.io** directly in the UI!
-- **⚡ Resilient Auto-Recovery**: If your custom MockAPI URL goes offline or fails, the app presents a custom error handler screen with a one-click button to securely fall back to Offline Demo Mode.
-- **📱 Fluid Responsiveness**: Designed using mobile-first CSS Grid and Flex layouts with backdrop blur visual elements.
+- **🔐 Per-User Data Isolation**: Automatically isolates expense records using user-specific local storage keys (`internspark_expenses_<username>`). Multiple users can log in on the same browser/device without data crossover.
+- **💸 Complete CRUD Expense Actions**: Seamlessly create, read, update, and delete expense items.
+- **🔍 Real-time Search & Filter**: Easily filter transactions by category (`Food`, `Transport`, `Entertainment`, `Health`, `Shopping`, `Others`) or search by description in real-time.
+- **📊 Interactive Dashboard & Analytics**:
+  - **Quick Stats Deck**: Instant overview of Total Spent, Total Entries, Average per Expense, and unique Categories Used.
+  - **Category Spending Distribution**: Visually appealing styled progress indicators showing breakdown percentages.
+  - **Monthly Expenditure Trends**: Chronological bar chart visualization of monthly spending trends over time.
+  - **Recent Log Tracker**: A quick look at the 5 most recent transactions.
+- **🎨 Glassmorphic Dark UI**: Premium user experience styled with CSS custom properties, backdrop-blurs, and vibrant accent glows.
 
 ---
 
@@ -23,11 +22,9 @@ SpendaWise is a high-end, responsive React Single Page Application (SPA) designe
 
 - **Framework**: React 19 (Hooks & Functional Components)
 - **Scaffolding**: Vite (Fast HMR)
-- **Routing**: React Router DOM v6
-- **HTTP Client**: Axios (REST API Client)
-- **Charts**: Recharts (Responsive SVG Visualization)
-- **Icons**: Lucide React (Premium Vector Graphics)
-- **Styling**: Vanilla CSS (Premium Custom Design Tokens & Glow Animations)
+- **State Management**: Redux Toolkit (`@reduxjs/toolkit` & `react-redux`)
+- **Routing**: React Router DOM v7 (HashRouter configured for GitHub Pages compatibility)
+- **Styling**: Vanilla CSS (Modern custom design tokens & micro-animations)
 
 ---
 
@@ -35,26 +32,25 @@ SpendaWise is a high-end, responsive React Single Page Application (SPA) designe
 
 ```text
 task2/
-├── public/                 # Static Assets
+├── public/                 # Static assets
 ├── src/
-│   ├── assets/             # Brand logos / SVGs
+│   ├── assets/             # Brand logos and design images
 │   ├── components/         # Reusable Component Deck
-│   │   ├── BarChart.jsx          # Recharts Monthly Bar Chart
-│   │   ├── CategoryFilter.jsx    # Dropdown Filter Component
-│   │   ├── ExpenseForm.jsx       # Reusable Add/Edit Form Component
-│   │   ├── ExpenseItem.jsx       # Custom Expense Row Card
-│   │   ├── ExpenseList.jsx       # Main list container & Local Aggregator
-│   │   ├── LoadingSpinner.jsx    # Glowing Loader Status component
-│   │   └── Navbar.jsx            # Routing navigation bar & Synchronizer Modal
+│   │   ├── ExpenseModal.jsx      # Modal form for adding/editing expenses
+│   │   └── Navbar.jsx            # Top navigation bar with user profile & logout
 │   ├── pages/              # Page Controllers
-│   │   └── Dashboard.jsx         # Analytics Statistics Deck & Charts
-│   ├── api.js              # Axios Client & Local Storage Fallback Core
-│   ├── App.jsx             # React Router Setup & Synchronized State Handler
-│   ├── index.css           # Plus Jakarta Sans import & UI Design Tokens
+│   │   ├── Dashboard.jsx         # Spending analytics, category breakdown & monthly trends
+│   │   ├── Expenses.jsx          # Interactive expense logs list, actions & stats
+│   │   └── Login.jsx             # Sleek, secure-looking dark-themed login portal
+│   ├── store/              # Redux State Management
+│   │   ├── expenseSlice.js       # Expense tracking slice, thunks, and user persistence
+│   │   └── index.js              # Redux store configuration
+│   ├── App.jsx             # Router configuration, layout & authentication sync
+│   ├── index.css           # Global typography, color variables, and design styles
 │   └── main.jsx            # React root renderer
-├── index.html              # SEO Meta elements
-├── package.json            # Scripts & Dependency list
-└── README.md               # Documentation
+├── index.html              # Shell HTML template & metadata
+├── package.json            # Scripts & dependencies
+└── README.md               # Project documentation
 ```
 
 ---
@@ -85,12 +81,17 @@ npm -v
 
 ---
 
+## 📦 Build & Deployment
 
+### Build for Production
+To generate a compiled production bundle inside the `dist/` directory, run:
+```bash
+npm run build
+```
 
-## 💎 Design System Customizations (`src/index.css`)
-
-SpendaWise is styled using advanced Vanilla CSS custom tokens:
-
-- **Primary Violet Accent**: `#8b5cf6` with glowing `box-shadow` animations.
-- **Glassmorphic Cards**: `rgba(18, 21, 32, 0.7)` card bodies with translucent borders (`rgba(255, 255, 255, 0.06)`) and `backdrop-filter: blur(12px)`.
-- **Responsive Charts**: SVG custom-gradients (`url(#barGlowGradient)`) rendering charts with elegant color schemes.
+### Deploy to GitHub Pages
+To compile the app and automatically deploy it to the `gh-pages` branch, run:
+```bash
+npm run deploy
+```
+This runs the production build and deploys the static files directly to your configured GitHub Pages repository.
