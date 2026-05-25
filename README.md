@@ -85,23 +85,7 @@ npm -v
 
 ---
 
-## 🌐 Connecting to MockAPI.io
 
-To connect SpendaWise to your own database cloud:
-
-1. Sign up/log in at [MockAPI.io](https://mockapi.io).
-2. Create a new **Project** (e.g., "Personal Finance").
-3. Add a new **Resource** named exactly **`expenses`**.
-4. Define the following schema fields inside MockAPI for the resource:
-   - `title`: string
-   - `amount`: number
-   - `category`: string
-   - `date`: string (format: `YYYY-MM-DD`)
-5. Copy your project's **API Endpoint URL** (looks like `https://664b4c4835bb1e47b62cdec2.mockapi.io/api/v1`).
-6. Launch SpendaWise, click the **Demo Mode / Settings Badge** at the top right of the Navbar, switch to **MockAPI (Live)**, paste your copied URL, and click **Save Changes**.
-7. *Voila!* The application will immediately perform Axios HTTP calls (GET, POST, PUT, DELETE) to sync directly with your live MockAPI database.
-
----
 
 ## 💎 Design System Customizations (`src/index.css`)
 
